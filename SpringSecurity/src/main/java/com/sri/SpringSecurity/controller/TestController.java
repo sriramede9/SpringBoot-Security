@@ -11,5 +11,17 @@ public class TestController {
 		
 		return ("<h2>Hi Sri!!<h2>");
 	}
+
+	@GetMapping("/user")
+	public String testUser() {
+		
+		return ("<h2>Hi User!!<h2>");
+	}
+	@GetMapping("/admin")
+	public String testAdmin() {
+		
+		return ("<h2>Hi Admin!!<h2>");
+	}
+	
 	
 }
