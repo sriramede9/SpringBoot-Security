@@ -46,3 +46,21 @@ spring.security.user.password=bar
 	    return manager;
 	}
  ```
+ 
+ ### Using AntMatchers to filter access based on roles
+ 
+ ```
+ http.
+		authorizeRequests()
+		.antMatchers("/**")  //all incoming requests
+		.hasAnyRole("ADMIN") //only admin can request
+		.and()
+		.formLogin();        //and should login using form
+ ```
+http.
+		authorizeRequests()
+		.antMatchers("/hi","/admin").hasRole("ADMIN") //most restrictive
+		.antMatchers("/hi","/user").hasRole("USER") //less restrictive
+		.antMatchers("/").permitAll()
+		.and()
+		.formLogin();
