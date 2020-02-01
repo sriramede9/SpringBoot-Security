@@ -29,7 +29,10 @@ public class ConfigJbdcSecurity extends WebSecurityConfigurerAdapter {
 		
 		auth
 		.jdbcAuthentication()
-		.dataSource(dataSource);
+		.dataSource(dataSource)
+		.withDefaultSchema()
+		.withUser(User.withUsername("user").password("pass").roles("USER"))
+		.withUser(User.withUsername("admin").password("admin").roles("USER","ADMIN"));
 	
 		
 		
