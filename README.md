@@ -64,3 +64,14 @@ http.
 		.antMatchers("/").permitAll()
 		.and()
 		.formLogin();
+
+### Using JDBC default Schema
+
+```
+auth
+		.jdbcAuthentication()
+		.dataSource(dataSource)
+		.withDefaultSchema()
+		.withUser(User.withUsername("user").password("pass").roles("USER"))
+		.withUser(User.withUsername("admin").password("admin").roles("USER","ADMIN"));
+```
