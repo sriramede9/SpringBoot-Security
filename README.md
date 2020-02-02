@@ -75,3 +75,70 @@ auth
 		.withUser(User.withUsername("user").password("pass").roles("USER"))
 		.withUser(User.withUsername("admin").password("admin").roles("USER","ADMIN"));
 ```
+
+### Using JPA 
+
+* step one
+* Make sure you have UserDetailsService(as authentication Manger expects UserDetailsService __ which has embeded UserDetails Service 
+```
+	@Autowired
+	UserDetailsService userDetailservice;
+
+	@Override
+	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+
+		// checking userDetailsService
+
+		auth.userDetailsService(userDetailservice); 
+	}
+
+	@Bean
+	public PasswordEncoder getPasswordEncoder() {
+		return NoOpPasswordEncoder.getInstance();
+	}
+
+	@Override
+	protected void configure(HttpSecurity http) throws Exception {
+		http.authorizeRequests().antMatchers("/hi", "/admin").hasRole("ADMIN") // most restrictive
+				.antMatchers("/hi", "/user").hasRole("USER") // less restrictive
+				.antMatchers("/").permitAll().and().formLogin();
+	}
+```
+* Step two
+
+Implement UserDetailsService and return it as this is the main 
+
+```
+@Service
+public class MyUserDetailService implements UserDetailsService {
+
+	@Autowired
+	UserRepository userRepository;
+
+	@Override
+	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+		
+		User findByUsername = userRepository.findByUsername(username);
+
+		if (findByUsername != null) {
+			return new MyUserDetails(findByUsername);
+		} else
+			throw new UsernameNotFoundException("no such user");
+	}
+
+}
+
+```
+
+* Step Three
+* find a user with username and enclose in MyUserDetails to return UserDetailsService obj
+```
+public class MyUserDetails implements UserDetails
+	private User user;
+
+	private List<GrantedAuthority> authorities;
+	public MyUserDetails(User user) {
+		super();
+		this.user = user;
+	}
+```
