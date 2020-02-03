@@ -159,3 +159,9 @@ spring.ldap.embedded.ldif=classpath:ldap-data.ldif
 spring.ldap.embedded.base-dn=dc=springframework,dc=org //filtering users in .ldif file with these details
 ```
 * Run the application and login with sample users bob,bobspassword
+
+### Using JWT to configure Security
+
+```
+add io.jjwt ,jax-b dependencies
+```
