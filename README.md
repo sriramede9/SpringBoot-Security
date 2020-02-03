@@ -142,3 +142,20 @@ public class MyUserDetails implements UserDetails
 		this.user = user;
 	}
 ```
+### Using LDAP 
+
+* Step one 
+
+```
+3 dependencies to configure ldap server
+Checkout POM with LDAP documentation
+```
+
+* Step two -> Configure port for LDAP and path for ldif file
+
+```
+spring.ldap.embedded.port=8389
+spring.ldap.embedded.ldif=classpath:ldap-data.ldif
+spring.ldap.embedded.base-dn=dc=springframework,dc=org //filtering users in .ldif file with these details
+```
+* Run the application and login with sample users bob,bobspassword
