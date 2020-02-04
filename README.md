@@ -162,6 +162,27 @@ spring.ldap.embedded.base-dn=dc=springframework,dc=org //filtering users in .ldi
 
 ### Using JWT to configure Security
 
+* Step one
+
 ```
-add io.jjwt ,jax-b dependencies
+add io.jjwt ,jax-b dependencies,Security
 ```
+
+* Step two --> config Security
+
+```
+Configure Web Security Configurer Adapter, where it return instance of User Details Service [configure your own UserDetails obj]
+```
+
+*** Step three --> Few util Classes to generate jwt token
+
+```
+Authentication Request,Authentication Response,Jwtutil are the config classes
+```
+
+*** Step four --> 
+
+```
+JwtController to handle the requests and permissions
+ps --> actual permissions are in config 
+````
