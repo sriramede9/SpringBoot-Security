@@ -186,3 +186,4 @@ Authentication Request,Authentication Response,Jwtutil are the config classes
 JwtController to handle the requests and permissions
 ps --> actual permissions are in config 
 ````
+## Working on How to Implement Securiy on  OAUTH 2.0 and use Github and Facebook to authenticate Users. 
